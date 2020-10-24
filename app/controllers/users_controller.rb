@@ -3,12 +3,12 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    users = User.all
-    render json: users, status: :ok
+    @users = User.all
+    render json: @users, status: :ok
   end
 
   def show
-    render json: user, status: :ok
+    render json: @user, status: :ok
   end
 
   def create
@@ -22,17 +22,17 @@ class UsersController < ApplicationController
   end
 
   def update
-    user.update(user_params)
+    @user.update(user_params)
   end
 
   def destroy
-    user.destroy!
+    @user.destroy!
   end
 
   private
 
     def set_user
-      user = User.find(params[:id])
+      @user = User.find(params[:id])
 
     rescue ActiveRecord::RecordNotFound
       head(:not_found)
