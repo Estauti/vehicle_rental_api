@@ -23,9 +23,14 @@ RSpec.describe "/vehicles", type: :request do
     attributes_for(:vehicle, model: nil)
   }
 
+  before(:each) do
+    user = create(:user)
+    sign_in user
+  end
+
   describe "GET /index" do
     it "renders a successful response" do
-      Vehicle.create! valid_attributes
+      create(:vehicle, valid_attributes)
       get vehicles_url
       expect(response).to be_successful
     end
@@ -33,7 +38,7 @@ RSpec.describe "/vehicles", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      vehicle = Vehicle.create! valid_attributes
+      vehicle = create(:vehicle, valid_attributes)
       get vehicle_url(vehicle)
       expect(response).to be_successful
     end
@@ -64,7 +69,7 @@ RSpec.describe "/vehicles", type: :request do
       }
 
       it "updates the requested vehicle" do
-        vehicle = Vehicle.create! valid_attributes
+        vehicle = create(:vehicle, valid_attributes)
         patch vehicle_url(vehicle), params: { vehicle: new_attributes }
         vehicle.reload
         expect(vehicle.model).to eq(new_attributes[:model])
@@ -73,7 +78,7 @@ RSpec.describe "/vehicles", type: :request do
 
     context "with invalid parameters" do
       it "renders a successful response" do
-        vehicle = Vehicle.create! valid_attributes
+        vehicle = create(:vehicle, valid_attributes)
         patch vehicle_url(vehicle), params: { vehicle: invalid_attributes }
         expect(response).to be_successful
       end
@@ -82,7 +87,7 @@ RSpec.describe "/vehicles", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested vehicle" do
-      vehicle = Vehicle.create! valid_attributes
+      vehicle = create(:vehicle, valid_attributes)
       expect {
         delete vehicle_url(vehicle)
       }.to change(Vehicle, :count).by(-1)
