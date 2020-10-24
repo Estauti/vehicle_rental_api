@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_23_233020) do
+ActiveRecord::Schema.define(version: 2020_10_24_005605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "rents", force: :cascade do |t|
+    t.bigint "vehicle_id", null: false
+    t.string "cpf"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["vehicle_id"], name: "index_rents_on_vehicle_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -39,4 +49,5 @@ ActiveRecord::Schema.define(version: 2020_10_23_233020) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "rents", "vehicles"
 end

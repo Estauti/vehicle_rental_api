@@ -8,6 +8,11 @@ RSpec.describe "/users", type: :request do
     attributes_for(:user, model: nil)
   }
 
+  before(:each) do
+    user = create(:user)
+    sign_in user
+  end
+
   describe "GET /index" do
     it "renders a successful response" do
       User.create! valid_attributes

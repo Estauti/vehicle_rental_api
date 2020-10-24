@@ -193,6 +193,8 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    validates_cpf_cnpj (0.2.0)
+      activemodel (>= 3.0.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.0.4)
@@ -231,6 +233,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  validates_cpf_cnpj
   web-console (>= 3.3.0)
   webdrivers
 
