@@ -1,6 +1,6 @@
 class RentsController < ApplicationController
   before_action :set_rent, only: [:show, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:create]
 
   def index
     @rents = Rent.all
