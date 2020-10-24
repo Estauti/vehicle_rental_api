@@ -1,5 +1,6 @@
 class VehiclesController < ApplicationController
   before_action :set_vehicle, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @vehicles = Vehicle.all
