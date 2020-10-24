@@ -93,4 +93,20 @@ RSpec.describe "/vehicles", type: :request do
       }.to change(Vehicle, :count).by(-1)
     end
   end
+
+  describe 'GET /brands' do
+    it 'renders a successful response' do
+      get brands_vehicles_url
+
+      expect(response).to be_successful
+    end
+  end
+
+  describe 'GET /brand_models' do
+    it 'renders a successful response' do
+      get brand_models_vehicles_url, params: {brand_id: 10}
+
+      expect(response).to be_successful
+    end
+  end
 end

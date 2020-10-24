@@ -29,6 +29,22 @@ class VehiclesController < ApplicationController
     @vehicle.destroy!
   end
 
+  def brands
+    brands = VehicleInfoService.getBrands
+    render json: brands, status: :ok
+
+  rescue StandardError => e
+    render json: {error: e.message}, status: :unprocessable_entity
+  end
+
+  def brand_models
+    models = VehicleInfoService.getBrandModels(params[:brand_id].to_i)
+    render json: models, status: :ok
+
+  rescue StandardError => e
+    render json: {error: e.message}, status: :unprocessable_entity
+  end
+
   private
 
     def set_vehicle
